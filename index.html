@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Portofolio CMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="text/javascript" src="assets/article.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Article CMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <section class="px-5 mt-4">
+    <div class="d-grid gap-2">
+      <!-- Menambahkan fungsi showForm jika tombol Create New Article diklik -->
+      <button class="btn btn-secondary" id="btn_create" type="button" onclick="showForm()">Create New Article</button>
+    </div>
+
+    <!-- Menambahkan id untuk form dengan "form_new_article" untuk mempermudah manipulasi dom form -->
+    <form id="form_new_article" class="border rounded px-4 py-3 mt-4">
+      <h3>New Article Form</h3>
+      <div class="mb-3">
+        <label class="form-label" for="article_title">Aritcle title</label>
+        <!-- Menambahkan id dan name article untuk best practice dengan "article_title", berguna juga untuk pengambilan value yang diinput saat tombol diklik -->
+        <input type="text" class="form-control" id="article_title" name="article_title" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="img_url">Image URL</label>
+        <!-- Menambahkan id dan name article untuk best practice dengan "img_url", berguna juga untuk pengambilan value yang diinput saat tombol diklik -->
+        <input type="text" class="form-control" id="img_url" name="img_url" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="content">Content</label>
+        <!-- Menambahkan id dan name article untuk best practice dengan "content", berguna juga untuk pengambilan value yang diinput saat tombol diklik -->
+        <textarea class="form-control" placeholder="Article content here" id="content" name="content" required></textarea>
+      </div>
+      <!-- Menambahkan fungsi addArticle jika tombol submit diklik -->
+      <button type="button" onclick="addArticle()" class="btn btn-primary">Submit</button>
+    </form>
+  </section>
+
+  <!-- Menambahkan id untuk section dengan "article-section" agar mempermudah manipulasi dom (menambahkan item article, menghapus item article) -->
+  <section id="article-section" class="p-5">
+    <!-- Menambahkan id pada div card, agar mempermudah penghapusan article terkait setelah tombol delete diklik (disini id article diasumsikan 0) -->
+    <div class="card mb-3" id="article0">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="https://placehold.co/800x600" class="img-fluid rounded-start article-img">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">Lorem Ipsum</h5>
+            <p class="card-text"><small class="text-body-secondary">published at: 12/07/2024 14:33</small></p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod optio omnis deleniti mollitia voluptatem repellendus, debitis ducimus consectetur error atque autem asperiores nisi ratione quos corporis beatae minima sapiente consequuntur!</p>
+            <!-- Menambahkan fungsi deleteArticleByPositionNumber dengan parameter "id" (disini idnya diasumsikan 0) yang sesuai dengan id div card, agar mempermudah penghapusan element article sesuai dengan tombol delete yang diklik -->
+            <button class="btn btn-danger" onclick="deleteArticleByPositionNumber(0)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menambahkan id pada div card, agar mempermudah penghapusan article terkait setelah tombol delete diklik (disini id article diasumsikan 1) -->
+    <div class="card mb-3" id="article1">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="https://placehold.co/800x600" class="img-fluid rounded-start article-img">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">Lorem Ipsum</h5>
+            <p class="card-text"><small class="text-body-secondary">published at: 12/07/2024 14:33</small></p>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod optio omnis deleniti mollitia voluptatem repellendus, debitis ducimus consectetur error atque autem asperiores nisi ratione quos corporis beatae minima sapiente consequuntur!</p>
+            <!-- Menambahkan fungsi deleteArticleByPositionNumber dengan parameter "id" (disini idnya diasumsikan 1) yang sesuai dengan id div card, agar mempermudah penghapusan element article sesuai dengan tombol delete yang diklik -->
+            <button class="btn btn-danger" onclick="deleteArticleByPositionNumber(1)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+<script type="text/javascript">
+  // Set inisialisasi saat page terbuka, form_new_article content display menjadi none, untuk menyembunyikan form_new_article di awal waktu dari page
+  document.getElementById("form_new_article").style.display = "none"
+</script>
+</html>
